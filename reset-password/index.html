@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Reset Password - Oche Legends</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { 
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+      background: #111111; 
+      color: #fff; 
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .container { 
+      max-width: 400px; 
+      text-align: center;
+      background: #1A1A1A;
+      border-radius: 20px;
+      padding: 40px 30px;
+      border: 1px solid #333;
+    }
+    h1 { 
+      color: #B71C1C; 
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .subtitle {
+      color: #D4AF37;
+      font-size: 12px;
+      letter-spacing: 2px;
+      margin-bottom: 30px;
+    }
+    p { 
+      color: #BDBDBD; 
+      line-height: 1.6; 
+      margin-bottom: 20px;
+      font-size: 15px;
+    }
+    .btn { 
+      display: inline-block; 
+      background: #B71C1C; 
+      color: #fff; 
+      padding: 16px 40px; 
+      border-radius: 12px; 
+      text-decoration: none; 
+      font-weight: 600;
+      font-size: 16px;
+      transition: opacity 0.2s;
+    }
+    .btn:hover { opacity: 0.9; }
+    .spinner {
+      width: 40px;
+      height: 40px;
+      border: 3px solid #333;
+      border-top-color: #B71C1C;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 20px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    #fallback { display: none; }
+    .app-store-links { margin-top: 30px; padding-top: 20px; border-top: 1px solid #333; }
+    .app-store-links p { font-size: 13px; color: #888; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Oche Legends</h1>
+    <p class="subtitle">DARTS CAREER MODE</p>
+    
+    <div id="loading">
+      <div class="spinner"></div>
+      <p>Opening the app to reset your password...</p>
+    </div>
+    
+    <div id="fallback">
+      <p>If the app didn't open automatically, tap the button below:</p>
+      <a id="openAppBtn" class="btn" href="#">Open App</a>
+      
+      <div class="app-store-links">
+        <p>Don't have the app installed?<br>Download Oche Legends from the App Store.</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      const params = new URLSearchParams(window.location.search);
+      const token = params.get('token');
+      
+      if (!token) {
+        document.getElementById('loading').innerHTML = '<p>Invalid reset link. Please request a new password reset from the app.</p>';
+        return;
+      }
+      
+      const deepLink = 'vibecode://reset-password?token=' + encodeURIComponent(token);
+      
+      // Set the button href
+      document.getElementById('openAppBtn').href = deepLink;
+      
+      // Try to open the app
+      window.location.href = deepLink;
+      
+      // Show fallback after 2.5 seconds if app didn't open
+      setTimeout(function() {
+        document.getElementById('loading').style.display = 'none';
+        document.getElementById('fallback').style.display = 'block';
+      }, 2500);
+    })();
+  </script>
+</body>
+</html>
