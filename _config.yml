@@ -3,6 +3,6 @@ include:
 
 defaults:
   - scope:
-      path: ".well-known/apple-app-site-association"
+      path: ".well-known/apple-app-site-association.json"
     values:
       content_type: "application/json"
