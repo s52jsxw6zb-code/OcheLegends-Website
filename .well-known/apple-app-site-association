@@ -1,0 +1,13 @@
+{
+  "webcredentials": {
+    "apps": ["QK382B985F.com.vibecode.ochelegends.6pa796"]
+  },
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["QK382B985F.com.vibecode.ochelegends.6pa796"],
+        "components": [{"/" : "/*"}]
+      }
+    ]
+  }
+}
